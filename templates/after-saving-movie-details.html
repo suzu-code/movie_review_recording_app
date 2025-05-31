@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ movie['title'] }} - 詳細</title>
+    <link rel="stylesheet" href="/static/main.css">
+</head>
+<body>
+    <header>
+        <h1><a href="{{ url_for('index') }}" class="top">MovieNest</a></h1>
+        <nav class="nav-links">
+            <a href="{{ url_for('favorite_index') }}">お気に入り</a>
+            <a href="{{ url_for('already_index') }}">視聴済み</a>
+            <a href="{{ url_for('want_to_watch_index') }}">見たい</a>
+        </nav>
+    </header>
+
+    <div class="movie-details">
+        <div class="movie-poster">
+            <img src="http://image.tmdb.org/t/p/w500{{ movie['poster_path'] }}" alt="ポスター画像">
+        </div>
+        <div class="movie-info">
+            <h2>{{ movie['title'] }}</h2>
+            <p><strong>公開日:</strong> {{ movie['release_date'] }}</p>
+            <p><strong>ジャンル:</strong> 
+                {% for genre in movie['genres'] %}
+                    {{ genre['name'] }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+            <p><strong>あらすじ:</strong> {{ movie['overview'] }}</p>
+        </div>
+
+        <form method="POST" action="/create">
+            <input type="hidden" name="movie_id" value="{{ movie['id'] }}">    
+            <label for="list">リストに追加:</label>
+            <select name="list" id="list" required>
+                <option value="1">お気に入り</option>
+                <option value="2">視聴済み</option>
+                <option value="3">見たい</option>
+            </select>
+
+            <h3>評価</h3>
+	  <form action="/update/{{ movie_id }}" method="POST">
+			<label for="overall_rating">総合評価:</label>
+			<input type="number" name="overall_rating" min="1" max="5" required value="{{ movie['overall_rating'] }}">
+
+			<label for="story_rating">ストーリー:</label>
+			<input type="number" name="story_rating" min="1" max="5" required value="{{ movie['story_rating'] }}">
+
+			<label for="acting_rating">演技:</label>
+			<input type="number" name="acting_rating" min="1" max="5" required value="{{ movie['acting_rating'] }}">
+
+			<label for="visuals_rating">映像美:</label>
+			<input type="number" name="visuals_rating" min="1" max="5" required value="{{ movie['visuals_rating'] }}">
+
+			<label for="music_rating">音楽:</label>
+			<input type="number" name="music_rating" min="1" max="5" required value="{{ movie['music_rating'] }}">
+
+			<h3>感想</h3>
+			<textarea name="review" rows="5" placeholder="感想を入力してください">{{ movie['review'] }}</textarea>
+            	<button type="submit">保存</button>
+        </form>
+    </div>
+</body>
+</html>
+
+

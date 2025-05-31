@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieNest</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header>
+        <h1>MovieNest</h1>
+        <nav class="nav-links">
+            <a href="./favorite.html">お気に入り</a>
+            <a href="./already.html">視聴済み</a>
+            <a href="./want_to_watch.html">見たい</a>
+        </nav>
+    </header>
+
+    <div class="search-bar" action="/search" method="POST">
+            <input type="text" placeholder="映画やドラマを検索..." >
+            <button type="submit">検索</button>
+    </div>
+
+    <div class="movie-list">
+        <div class="movie-item">
+            <img src="https://via.placeholder.com/100x150" alt="Movie Poster">
+            <div class="movie-details">
+                <h3>映画タイトル</h3>
+                <p>映画の簡単な説明</p>
+            </div>
+        </div>
+
+        <div class="movie-item">
+            <img src="https://via.placeholder.com/100x150" alt="Movie Poster">
+            <div class="movie-details">
+                <h3>映画タイトル</h3>
+                <p>映画の簡単な説明</p>
+            </div>
+        </div>
+
+        <div class="movie-item">
+            <img src="https://via.placeholder.com/100x150" alt="Movie Poster">
+            <div class="movie-details">
+                <h3>映画タイトル</h3>
+                <p>映画の簡単な説明</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

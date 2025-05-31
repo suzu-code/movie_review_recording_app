@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>映画検索ツール</title>
+    <link rel="stylesheet" href="/static/main.css">
+</head>
+<body>
+	<header>
+		<h1><a href="{{ url_for('index') }}" class="top">MovieNest</a></h1>
+		<nav class="nav-links">
+		    <a href="{{ url_for('favorite_index') }}">お気に入り</a>
+		    <a href="{{ url_for('already_index') }}">視聴済み</a>
+		    <a href="{{ url_for('want_to_watch_index') }}">見たい</a>
+		</nav>
+	</header>
+
+
+    <div class="text-center my-5">
+        <form method="post">
+            <input type="text" name="title" class="form-control" placeholder="映画をキーワードから探す" required>
+            <button class="btn btn-primary mt-2" type="submit">検索</button>
+        </form>
+    </div>
+
+    {% if keyword %}
+        <div class="mb-5">
+            <h3>「{{ keyword }}」の検索結果</h3>
+        </div>
+        <div class="row">
+            {% for cinema in cinema_data %}
+		<a href="/movie/{{ cinema.id }}">
+                <div class="movie-list">
+                    <div class="movie-item">
+                        <img src="http://image.tmdb.org/t/p/w154{{ cinema.image }}" alt="画像です" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="title">{{ cinema.title }}</h5>
+                            <h5 class="release_date">{{ cinema.release_date }}</h5>
+                        </div>
+                    </div>
+                </div>
+		</a>
+            {% else %}
+                <p>該当するものはありません。</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+</body>
+</html>
